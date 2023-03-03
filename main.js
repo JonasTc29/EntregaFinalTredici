@@ -95,16 +95,19 @@ class Carrito
 
     agregarProducto(id)
     {
+        console.log("Agregando el producto con id " + id + " al carrito")
         if (this.existeEnCarrito(id))
         {
             // encontrar el producto en nuestro carrito y despues
             let prod = this.listaCarrito.find(prod => prod.id == id); // Doble igual y no triple porque el id viene como string y el de prod disponibles es numero
+            console.log("el prod " + prod.nombre + " ya existe en el carrito, la cantidad actual es " + prod.cantActual + " y el stock disponible es " + prod.stockDisponible);
             
             if (prod.stockDisponible - 1 >= 0) {
                 // Aumentar cantidad del producto en el carrito  
                 prod.cantActual += 1;
                 // restar el stock
                 prod.stockDisponible -= 1;
+                console.log("agregamos 1 unidad y ahora cantActual: " + prod.cantActual + " y el stockDisponible es " + prod.stockDisponible);
             }
             else
             {
@@ -138,7 +141,7 @@ class Carrito
 
 // --- CÓDIGO ---
 
-funcionInicial();
+// funcionInicial();
 
 const productosDisponibles = inicializarProductosDisponibles();
 let miCarrito = new Carrito();
@@ -147,4 +150,33 @@ function agregarACarrito(elem) {
     miCarrito.agregarProducto(elem.id);
 }
 
+function actualizarTabla()
+{
+  let tablaProducts = document.getElementById("tablaProductos");
+  for (let i = 1; i <= tablaProducts.rows.length - 1; i++)
+  {
+    let cantProdDeLaFila = getCantDeProdFila(tablaProducts.rows[i], i);
+    //let precioTotalDeLaFila = getPrecioTotalFila(tablaProducts[i], i);
+    console.log(tablaProducts.rows[i].innerText);
+  }
+}
+
+function getCantDeProdFila(fila, id)
+{
+  let existeEnCarrito = miCarrito.existeEnCarrito(id);
+  if (existeEnCarrito)
+  {
+    let prodEnCarrito = miCarrito.listaCarrito.find(prod => prod.id == id);
+    document.getElementById("tablaProductos").rows[id].getElementsByClassName("cantProd").innerHTML = prodEnCarrito.cantActual;
+    document.getElementById("tablaProductos").rows[id].getElementsByClassName("totalProd").innerHTML = prodEnCarrito.precio * prodEnCarrito.cantActual;
+  }
+  else {
+    document.getElementById("tablaProductos").rows[id].getElementsByClassName("cantProd").innerHTML = 0;
+    document.getElementById("tablaProductos").rows[id].getElementsByClassName("totalProd").innerHTML = 0;
+  }
+  //fila[id].getElementsByClassName("cantProd") <- te devuelve el <tr> (la columna Cantidad de la fila en la que estamos)
+  //fila[id].getElementsByClassName("totalProd") <- te devuelve el <tr> (la columna PrecioTotal de la fila en la que estamos)
+}
+
 calcularTotal(); // despues lo voy a mover
+actualizarTabla();
