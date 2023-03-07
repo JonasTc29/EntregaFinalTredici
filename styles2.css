@@ -28,6 +28,7 @@ article {
     width: 50%;
 }
 
+
 nav {
     background :rgb(3, 70, 148);
     color: white;
@@ -52,7 +53,61 @@ nav a {
         column-count:3; ; 
         font-family: Verdana, Geneva, Tahoma, sans-serif;
         color:rgb(9, 14, 158)}
+
+
+/*------Carrito--------*/
+
+.carrito-total {
+
+    color:blue;
+    font-size: 30px;
+
+}     
+.carrito-total:hover {
+    color: rgba(0, 55, 255, 0.692);
+    text-shadow: rgb(128, 128, 128) 2px 2px 3px;
+    margin: 0 auto;
+
+}
+
+
+
+/*----------Footer---------*/
+
+footer i {
+    bottom: 0;
+    background:  #2a3335a2;
+    color: #4000ff;
+}
+footer a:hover{
+    color:#4000ff;
+}
+footer{
+    background-color: rgba(163, 207, 240, 0.943);
+    z-index: 10;
+}
     
+/*------Icono whatsapp------*/
+
+.btn-whatsapp {
+    display:block;
+    font-size: 4rem;
+    color: rgba(249, 250, 201, 0.897);
+    position: fixed;
+    right:20px;
+    bottom:20px;
+    border-radius:50%;
+    line-height:80px;
+    text-align:center;
+    z-index:999;
+}
+.btn-whatsapp :hover{
+    color: #ffff00;
+}
+
+
+
+
 
 
 

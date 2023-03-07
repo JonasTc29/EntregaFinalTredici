@@ -50,13 +50,14 @@ function inicializarProductosDisponibles() {
 
 function calcularTotal()
 {
-    let precios = document.querySelectorAll('.precio'); //selecciono todos los precios de los productos
     let total = 0;
-    for (let i = 0; i < precios.length; i++) {
-        let precioNumero = parseInt(precios[i].innerHTML.slice(2)); //convierto el valor del precio de string a numero para poder sumarlo
-        total = total + precioNumero;
+    for (let i = 0; i < miCarrito.listaCarrito.length; i++)
+    {
+        let productoActual = miCarrito.listaCarrito[i];
+        let precioTotalProducto = productoActual.cantActual * productoActual.precio;
+        total = total + precioTotalProducto;
     }   
-    let printTotal = "De comprar todos los productos de la web, el valor total del carrito sería de $ " + total;
+    let printTotal = "$" + total;
     document.getElementById("printTotalCarrito").innerHTML = printTotal;
 }
 
@@ -141,7 +142,7 @@ class Carrito
 
 // --- CÓDIGO ---
 
-// funcionInicial();
+funcionInicial();
 
 const productosDisponibles = inicializarProductosDisponibles();
 let miCarrito = new Carrito();
@@ -150,33 +151,14 @@ function agregarACarrito(elem) {
     miCarrito.agregarProducto(elem.id);
 }
 
-function actualizarTabla()
-{
-  let tablaProducts = document.getElementById("tablaProductos");
-  for (let i = 1; i <= tablaProducts.rows.length - 1; i++)
-  {
-    let cantProdDeLaFila = getCantDeProdFila(tablaProducts.rows[i], i);
-    //let precioTotalDeLaFila = getPrecioTotalFila(tablaProducts[i], i);
-    console.log(tablaProducts.rows[i].innerText);
-  }
-}
-
-function getCantDeProdFila(fila, id)
-{
-  let existeEnCarrito = miCarrito.existeEnCarrito(id);
-  if (existeEnCarrito)
-  {
-    let prodEnCarrito = miCarrito.listaCarrito.find(prod => prod.id == id);
-    document.getElementById("tablaProductos").rows[id].getElementsByClassName("cantProd").innerHTML = prodEnCarrito.cantActual;
-    document.getElementById("tablaProductos").rows[id].getElementsByClassName("totalProd").innerHTML = prodEnCarrito.precio * prodEnCarrito.cantActual;
-  }
-  else {
-    document.getElementById("tablaProductos").rows[id].getElementsByClassName("cantProd").innerHTML = 0;
-    document.getElementById("tablaProductos").rows[id].getElementsByClassName("totalProd").innerHTML = 0;
-  }
-  //fila[id].getElementsByClassName("cantProd") <- te devuelve el <tr> (la columna Cantidad de la fila en la que estamos)
-  //fila[id].getElementsByClassName("totalProd") <- te devuelve el <tr> (la columna PrecioTotal de la fila en la que estamos)
-}
-
 calcularTotal(); // despues lo voy a mover
-actualizarTabla();
+
+// Para que se actualice el valor total del carrito cada vez que se agregue un producto
+let botonesAgregar = document.querySelectorAll('.btn-agregar');
+for (var i = 0 ; i < botonesAgregar.length; i++) {
+    botonesAgregar[i].addEventListener('click', (event) => {
+        calcularTotal();
+    }); 
+ }
+
+

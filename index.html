@@ -20,270 +20,211 @@
     <header class="container-fluid p-3 mb-2 bg-info text-dark d-flex justify-content-center">
         <p class="mb-0 p-2 fs-3">Bienvenidos a Suplementos BuildHealth</p>
     </header>
-    <!-- BARRA DE NAVEGACION -->
-    <nav class="navbar navbar-expand-lg bg-light" id="menu">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Suplementos BuildHealth</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="./index.html">
-                            Proteinas y Quemadores
-                        </a>
-                    </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Nuestros Productos
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li onclick="alert('No hay stock disponible de este producto')">
-                                <a class="dropdown-item" href="#">
-                                    Importados
-                                </a>
-                            </li>
-                            <li onclick="mialerta();">
-                                <a class="dropdown-item" href="#">
-                                    Nacionales
-                                </a>
-                            </li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                            <li onclick="promo();">
-                                <a class="dropdown-item" href="#">
-                                    Promociones
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Sumate
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            Beneficios
-                        </a>
-                    </li>
-                    <li class="navbar-brand"><a class="boton-carrito" href="./carrito.html">
-                        <i class="bi bi-cart-fill"></i>Carrito
-                        <span class="numerito">0</span>
+</header>
+<!-- BARRA DE NAVEGACION -->
+<nav class="navbar navbar-expand-lg bg-light" id="menu">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Suplementos BuildHealth</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html">
+                        Proteinas y Quemadores
                     </a>
-                   </li>
-                     </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">
-                        Search 
-                </form>
-            </div>
-        </div>
-    </nav>
-    <!-- SECCION PRODUCTOS -->
-    <div class="body-proteinas">
-        <div class="columna-proteinas">
-            <div id="galeria">
-                <figure>
-                    <div>
-                        <img src="./Assets/Proteena.png" width="140" height="140" />
-                        <figcaption>Whey Protein ENA</figcaption>
-                        <p class="precio">$ 6000</p>
-                        <button id="1" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    <div>
-                        <img src="./Assets/ProteB.jpg" width="140" height="140" />
-                        <figcaption>Proteina Bsn Chocolate</figcaption>
-                        <p class="precio">$ 18000</p>
-                        <button id="2" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Vainillabsn.png" width="140" height="140" />
-                        <figcaption>Proteina Bsn Vainilla</figcaption>
-                        <p class="precio">$ 18000</p>
-                        <button id="3" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/ProteMuscletech.png" width="140" height="140" />
-                        <figcaption>Proteina Muscletech</figcaption>
-                        <p class="precio">$ 15000</p>
-                        <button id="4" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Protestar.png" width="140" height="140" />
-                        <figcaption>Proteina Star</figcaption>
-                        <p class="precio">$ 4800</p>
-                        <button id="5" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Proteincelu.png" width="140" height="140" />
-                        <figcaption>Proteina Cellucor</figcaption>
-                        <p class="precio">$ 20000</p>
-                        <button id="6" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Quemadorena.webp" width="140" height="140" />
-                        <figcaption>Quemador ENA</figcaption>
-                        <p class="precio">$ 2200</p>
-                        <button id="7" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src= "./Assets/Quemadorhp.png" width="140"  height="140" />
-                        <figcaption>Quemador BPI Sports</figcaption>
-                        <p class="precio">$ 4000</p>
-                        <button id="8" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Quemadorultra.webp" width="140" height="140" />
-                        <figcaption>Quemador Ultra Tech</figcaption>
-                        <p class="precio">$ 3500</p>
-                        <button id="9" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Quemadoruniversal.webp" width="140" height="140" />
-                        <figcaption>Quemador Universal</figcaption>
-                        <p class="precio">$ 7500</p>
-                        <button id="10" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Quemadorwomen.png" width="140" height="140" />
-                        <figcaption>Quemador Women Keto</figcaption>
-                        <p class="precio">$ 3000</p>
-                        <button id="11" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                    <div>
-                        <img src="./Assets/Quemadorblack.jpg" width="140" height="140" />
-                        <figcaption>Quemador Black</figcaption>
-                        <p class="precio">$ 4000</p>
-                        <button id="12" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
-                            AGREGAR AL CARRITO
-                        </button>
-                    </div>
-                </figure>
-            </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Nuestros Productos
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li onclick="alert('No hay stock disponible de este producto')">
+                            <a class="dropdown-item" href="#">
+                                Importados
+                            </a>
+                        </li>
+                        <li onclick="mialerta();">
+                            <a class="dropdown-item" href="#">
+                                Nacionales
+                            </a>
+                        </li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li onclick="promo();">
+                            <a class="dropdown-item" href="#">
+                                Promociones
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Sumate
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        Beneficios
+                    </a>
+                </li>
+                <li class="navbar-brand"><a class="boton-carrito" href="./carrito.html">
+                    <i class="bi bi-cart-fill"></i>Carrito
+                    <span class="numerito">0</span>
+                </a>
+               </li>
+                 </ul>
+            <form class="d-flex" role="search">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">
+                    Search 
+            </form>
         </div>
     </div>
-   <!-- Carrito de Compras -->
-   <!-- <div class="carrito" id="carrito">
-    <div class="header-carrito">
-        <h2>Tu Carrito</h2>
-    </div> -->
-    <div class="container">
-		<h1>Carrito</h1>
-		<hr>
-		<table id="tablaProductos" class="table">
-			<thead>
-			  <tr>
-				<th scope="col">Producto</th>
-				<th scope="col">Cantidad</th>
-				<th scope="col">Total</th>              
-			  </tr>
-			</thead>
-			<tbody id="items">
-                <tr>
-                    <td>Whey Protein ENA</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Proteina Bsn Chocolate</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr> 
-                  <tr>
-                    <td>Proteina Bsn Vainilla</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Proteina Muscletech</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Proteina Star</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Proteina Cellucor</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador ENA</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador BPI Sports</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador Ultratech</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador Universal</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador Women Keto</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-                  <tr>
-                    <td>Quemador Black</td>
-                    <td class="cantProd"></td>
-                    <td class="totalProd"></td>
-                  </tr>
-            </tbody>
-			<tfoot>
-			  <!-- <tr id="footer">
-				<th scope="row" colspan="5">Carrito vacío - ¡Comience a comprar!</th>
-			  </tr> -->
-			</tfoot>
-		  </table>
-		<div class="row" id="cards"></div>
-	</div>
-    <div class="carrito-items">
-    </div>
-    <div class="carrito-total">
-        <div class="fila">
-            <strong>Tu Total</strong>
-            <span id="printTotalCarrito"></span>
+</nav>
+<!-- SECCION PRODUCTOS -->
+<div class="body-proteinas">
+    <div class="columna-proteinas">
+        <div id="galeria">
+            <figure>
+                <div>
+                    <img src="./Assets/Proteena.png" width="140" height="140" />
+                    <figcaption>Whey Protein ENA</figcaption>
+                    <p class="precio">$ 6000</p>
+                    <button id="1" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                <div>
+                    <img src="./Assets/ProteB.jpg" width="140" height="140" />
+                    <figcaption>Proteina Bsn Chocolate</figcaption>
+                    <p class="precio">$ 18000</p>
+                    <button id="2" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Vainillabsn.png" width="140" height="140" />
+                    <figcaption>Proteina Bsn Vainilla</figcaption>
+                    <p class="precio">$ 18000</p>
+                    <button id="3" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/ProteMuscletech.png" width="140" height="140" />
+                    <figcaption>Proteina Muscletech</figcaption>
+                    <p class="precio">$ 15000</p>
+                    <button id="4" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Protestar.png" width="140" height="140" />
+                    <figcaption>Proteina Star</figcaption>
+                    <p class="precio">$ 4800</p>
+                    <button id="5" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Proteincelu.png" width="140" height="140" />
+                    <figcaption>Proteina Cellucor</figcaption>
+                    <p class="precio">$ 20000</p>
+                    <button id="6" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Quemadorena.webp" width="140" height="140" />
+                    <figcaption>Quemador ENA</figcaption>
+                    <p class="precio">$ 2200</p>
+                    <button id="7" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src= "./Assets/Quemadorhp.png" width="140"  height="140" />
+                    <figcaption>Quemador BPI Sports</figcaption>
+                    <p class="precio">$ 4000</p>
+                    <button id="8" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Quemadorultra.webp" width="140" height="140" />
+                    <figcaption>Quemador Ultra Tech</figcaption>
+                    <p class="precio">$ 3500</p>
+                    <button id="9" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Quemadoruniversal.webp" width="140" height="140" />
+                    <figcaption>Quemador Universal</figcaption>
+                    <p class="precio">$ 7500</p>
+                    <button id="10" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Quemadorwomen.png" width="140" height="140" />
+                    <figcaption>Quemador Women Keto</figcaption>
+                    <p class="precio">$ 3000</p>
+                    <button id="11" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+                <div>
+                    <img src="./Assets/Quemadorblack.jpg" width="140" height="140" />
+                    <figcaption>Quemador Black</figcaption>
+                    <p class="precio">$ 4000</p>
+                    <button id="12" type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(this)">
+                        AGREGAR AL CARRITO
+                    </button>
+                </div>
+            </figure>
         </div>
-        <!--<button class="btn-pagar">Pagar <i class="fa-solid fa-bag-shopping"></i> </button>-->
     </div>
 </div>
-    </section>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
+<div class="carrito-total">
+    <div class="fila">
+        <strong>Tu Total</strong>
+        <span id="printTotalCarrito"></span>
+    </div>
+    <!-- Despues probar agregar un boton para vaciar el contenido del carrito y actualizar el printTotalCarrito llamando a calcularTotal -->
+</div>
+</div>
+
+<!--Icono wsp flotante-->
+<div>
+<a href="https://wa.me/1156555505" class="btn-whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+</div>
+</section>
+
+<!--FOOTER-->
+
+<footer class="footer py-4">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-4 text-center">
+                <address class="amarillo fs-4"><i class="fas fa-street-view amarillo fs-3 "></i>Av Libertador 2980</address>
+            </div>
+            <div class="col-12 col-md-4 text-center ">
+                <a href="https://wa.me/1168500414" target="_blank" class="amarillo fs-4"><i class="fab fa-whatsapp amarillo fs-3"></i> 115655-5505</a>
+            </div> 
+            <div class="col-12 col-md-4 text-center">
+                <a href="#" target="_blank" class="amarillo fs-4"><i class="fab fa-instagram amarillo fs-3"></i> @Buildhealthsuplementos</a>
+            </div>
+        </div>
+    </div>
+    <p class="text-muted text-center">Todos los derechos reservados. <i class="far fa-copyright blanco fs-5"></i>Copyright  2022. Dev. <a href="#" class="blanco" target="_blank">jonastredici@yahoo.com</a>  Jonas Tredici  <a href="https://github.com/Jonastc29" target="_blank" class="blanco"><i class="fab fa-github amarillo fs-4"></i></a>  </p>
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>
