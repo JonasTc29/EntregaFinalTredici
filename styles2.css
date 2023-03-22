@@ -5,7 +5,7 @@ body {
 
 header{
     background :rgb(3, 70, 148);
-    color: white;
+    color: grey;
     height: 100px;
     width: 100%;    
 }
@@ -69,6 +69,11 @@ nav a {
     margin: 0 auto;
 
 }
+#pagar :hover {
+    color: rgb(4, 94, 228);
+    font-weight: 900;
+    background-color: #09a0e63b;
+}
 
 
 
@@ -86,28 +91,31 @@ footer{
     background-color: rgba(163, 207, 240, 0.943);
     z-index: 10;
 }
-    
-/*------Icono whatsapp------*/
 
-.btn-whatsapp {
-    display:block;
-    font-size: 4rem;
-    color: rgba(249, 250, 201, 0.897);
-    position: fixed;
-    right:20px;
-    bottom:20px;
-    border-radius:50%;
-    line-height:80px;
-    text-align:center;
-    z-index:999;
-}
-.btn-whatsapp :hover{
-    color: #ffff00;
+/* Modal */ 
+
+.modal-title {
+    color: black;
 }
 
+.row-prod-carrito > img
+{
+    display: inline-block;
+}
 
+.row-prod-carrito > div
+{
+    display: inline-block;
+}
 
+.prod-carrito h5, p{
+    color: black;
+}
 
+.prod-carrito-img {
+    height: 25%;
+    width: 25%;
+}
 
 
 
