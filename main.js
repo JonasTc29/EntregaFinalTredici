@@ -131,6 +131,7 @@ class Carrito
             this.listaCarrito.push(nuevoProducto);
             
             this.agregarAModal(nuevoProducto);
+            addListeners();
             this.actualizarCarritoEnStorage();
             this.alertaProductoAgregado(nuevoProducto.nombre);
         }
@@ -205,12 +206,16 @@ function quitarDelCarrito(elem) {
 calcularTotal(); // despues lo voy a mover
 
 // Para que se actualice el valor total del carrito cada vez que se agregue un producto
-let botonesAgregar = document.querySelectorAll('.btn-agregar');
-for (var i = 0 ; i < botonesAgregar.length; i++) {
-    botonesAgregar[i].addEventListener('click', (event) => {
-        calcularTotal();
-    }); 
- }
+function addListeners() {
+    let botonesAgregar = document.querySelectorAll('.btn-agregar');
+    for (var i = 0 ; i < botonesAgregar.length; i++) {
+        botonesAgregar[i].addEventListener('click', (event) => {
+            calcularTotal();
+        }); 
+     }
+}
+
+addListeners();
 
 // Function para finalizar compra -> Muestra fin de compra exitosa y vacía el carrito
 function finalizarCompra()
