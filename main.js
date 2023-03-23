@@ -5,23 +5,6 @@ function mialerta()
     alert("Reservas únicamente por WhatsApp");
 }
 
-function inicializarProductosDisponibles() {
-    return [
-        new Producto(1, "Whey Protein ENA", 6000, 10, "./Assets/Proteena.png" ),
-        new Producto(2, "Proteina Bsn Chocolate", 18000, 5, "./Assets/ProteB.jpg"),
-        new Producto(3, "Proteina Bsn Vainilla", 18000, 5, "./Assets/Vainillabsn.png"),
-        new Producto(4, "Proteina Muscletech", 15000, 15, "./Assets/ProteMuscletech.png"),
-        new Producto(5, "Proteina Star", 4800, 5, "./Assets/Protestar.png"),
-        new Producto(6, "Proteina Cellucor", 20000, 4, "./Assets/Proteincelu.png"),
-        new Producto(7, "Quemador ENA", 2200, 15, "./Assets/Quemadorena.webp"),
-        new Producto(8, "Quemador BPI Sports", 4000, 10, "./Assets/Quemadorhp.png"),
-        new Producto(9, "Quemador Ultra Tech", 3500, 10, "./Assets/Quemadorultra.webp"), 
-        new Producto(10, "Quemador Universal", 7500, 10, "./Assets/Quemadoruniversal.webp"),
-        new Producto(11, "Quemador Women Keto", 3000, 1, "./Assets/Quemadorwomen.png"),
-        new Producto(12, "Quemador Black", 4000, 3, "./Assets/Quemadorblack.jpg"), 
-    ];
-}
-
 function calcularTotal()
 {
     let total = 0;
@@ -35,25 +18,26 @@ function calcularTotal()
 }
 
 // --- CLASES ---
-
-class Producto
-{
-    constructor(id, nombre, precio, stockDisponible, rutaImg)
-    {
-        this.id = id;
-        this.nombre = nombre;
-        this.precio = precio;
-        this.stockDisponible = stockDisponible;
-        this.cantActual = 0;
-        this.rutaImg = rutaImg;
-    }
-}
  
 class Carrito
 {
     constructor()
     {
-        this.listaCarrito = [];
+        this.listaCarrito = this.obtenerCarritoDeStorage();
+        for (let i = 0; i < this.listaCarrito.length; i++) {
+            const item = this.listaCarrito[i];
+            this.agregarAModal(item);
+        }
+    }
+
+    obtenerCarritoDeStorage() {
+        let miCarrito = localStorage.getItem("carrito");
+        return JSON.parse(miCarrito) || [];
+    }
+
+    actualizarCarritoEnStorage()
+    {
+        localStorage.setItem("carrito", JSON.stringify(this.listaCarrito));
     }
 
     existeEnCarrito(id) {
@@ -69,6 +53,38 @@ class Carrito
             showConfirmButton: false,
             timer: 1500
           });
+    }
+
+    alertaProductoQuitado(nombreProducto)
+    {
+        Swal.fire({
+            position: 'center',
+            icon: 'info',
+            title: `Se ha quitado una unidad del producto \n${nombreProducto} del carrito`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
+
+    agregarAModal(nuevoProducto) {
+        let prueba_carrito = document.getElementById("contenedor_carrito");
+        prueba_carrito.innerHTML += `
+        <div class="card row-prod-carrito" style="width: 18rem;">
+            <img src= "${nuevoProducto.rutaImg}" class="img-fluid rounded-start prod-carrito-img" alt="..." />
+            <div class="card-body prod-carrito" id=prod-carrito-${nuevoProducto.id}">
+                <h5 class="card-title">${nuevoProducto.nombre}</h5>
+                <p class="card-text" id="det-prod-carrito-${nuevoProducto.id}">
+                    Precio: $${nuevoProducto.precio} x ${nuevoProducto.cantActual} unid.
+                </p>
+                <button type="button" class="btn btn-primary btn-sm btn-agregar" onclick="quitarDelCarrito(${nuevoProducto.id})">
+                    <i class="fas fa-minus"></i>
+                </button>
+                <button type="button" class="btn btn-primary btn-sm btn-agregar" onclick="agregarACarrito(${nuevoProducto.id})">
+                    <i class="fas fa-plus"></i>
+                </button>   
+            </div>  
+        </div>
+        `;  
     }
 
     agregarProducto(id)
@@ -91,6 +107,7 @@ class Carrito
                     Precio: $ ${prod.precio} x ${prod.cantActual} unid.
                 </p>`;
 
+                this.actualizarCarritoEnStorage();
                 this.alertaProductoAgregado(prod.nombre);
             }
             else
@@ -105,26 +122,16 @@ class Carrito
         else
         {
             // Agrego la card del nuevo producto al carrito
-            let nuevoProducto = productosDisponibles.find(prod => prod.id == id);
+            const prodEnGaleria = productosDisponibles.find(prod => prod.id == id);
             
+            let nuevoProducto = { ...prodEnGaleria };            
             nuevoProducto.cantActual += 1;
             nuevoProducto.stockDisponible -= 1;
             
             this.listaCarrito.push(nuevoProducto);
             
-            let prueba_carrito = document.getElementById("contenedor_carrito");
-            prueba_carrito.innerHTML += `
-            <div class="card row-prod-carrito" style="width: 18rem;">
-                <img src= "${nuevoProducto.rutaImg}" class="img-fluid rounded-start prod-carrito-img" alt="..." />
-                <div class="card-body prod-carrito" id=prod-carrito-${nuevoProducto.id}">
-                    <h5 class="card-title">${nuevoProducto.nombre}</h5>
-                    <p class="card-text" id="det-prod-carrito-${nuevoProducto.id}">
-                        Precio: $${nuevoProducto.precio} x ${nuevoProducto.cantActual} unid.
-                    </p>
-                </div>  
-            </div>
-            `;
-
+            this.agregarAModal(nuevoProducto);
+            this.actualizarCarritoEnStorage();
             this.alertaProductoAgregado(nuevoProducto.nombre);
         }
     }
@@ -137,21 +144,62 @@ class Carrito
     quitarProducto(id) 
     {
         let prod = this.listaCarrito.find(prod => prod.id == id);
-        if (prod.cantActual - 1 >= 0)
+        if (prod.cantActual - 1 > 0)
         {
             prod.cantActual -= 1;
             prod.stockDisponible += 1;
+            
+            // Actualizo la cantidad del producto ya existente en el carrito
+            let detalleProd = document.getElementById(`det-prod-carrito-${prod.id}`);
+            detalleProd.innerHTML = `
+            <p class="card-text det-prod-carrito-${prod.id}">
+                Precio: $ ${prod.precio} x ${prod.cantActual} unid.
+            </p>`;
+            
+            this.actualizarCarritoEnStorage();
+            this.alertaProductoQuitado(prod.nombre);
+        }
+        else
+        {
+            //this.listaCarrito.remove(prod.id); // cómo hago algo así?
+            // Saco el producto del carrito
+            let detalleProd = document.getElementById(`det-prod-carrito-${prod.id}`);
+            detalleProd.remove();
+            
+            this.actualizarCarritoEnStorage();
+            this.alertaProductoQuitado(prod.nombre);
         }
     }
 }
 
 // --- CÓDIGO ---
 
-const productosDisponibles = inicializarProductosDisponibles();
+// Productos de la galería como JSON
+const productosDisponibles = [
+    {id: 1, nombre: "Whey Protein ENA", precio: 6000, stockDisponible: 10, cantActual: 0, rutaImg: "./Assets/Proteena.png"},
+    {id: 2, nombre: "Proteina Bsn Chocolate", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/ProteB.jpg"},
+    {id: 3, nombre: "Proteina Bsn Vainilla", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/Vainillabsn.png"},
+    {id: 4,nombre:  "Proteina Muscletech",precio: 15000, stockDisponible:15, cantActual: 0, rutaImg:"./Assets/ProteMuscletech.png"},
+    {id: 5, nombre: "Proteina Star", precio:4800, stockDisponible:5, cantActual: 0, rutaImg:"./Assets/Protestar.png"},
+    {id: 6, nombre: "Proteina Cellucor",precio: 20000,stockDisponible: 4, cantActual: 0, rutaImg:"./Assets/Proteincelu.png"},
+    {id: 7, nombre: "Quemador ENA",precio: 2200, stockDisponible:15, cantActual: 0, rutaImg:"./Assets/Quemadorena.webp"},
+    {id: 8, nombre: "Quemador BPI Sports", precio: 4000,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadorhp.png"},
+    {id: 9, nombre: "Quemador Ultra Tech", precio: 3500,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadorultra.webp"}, 
+    {id: 10, nombre: "Quemador Universal", precio: 7500,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadoruniversal.webp"},
+    {id: 11, nombre: "Quemador Women Keto", precio: 3000,stockDisponible: 1, cantActual: 0, rutaImg:"./Assets/Quemadorwomen.png"},
+    {id: 12, nombre: "Quemador Black",precio:  4000, stockDisponible:3, cantActual: 0, rutaImg:"./Assets/Quemadorblack.jpg"}, 
+ ];
+// El carrito empieza vacío
 let miCarrito = new Carrito();
 
 function agregarACarrito(elem) {
-    miCarrito.agregarProducto(elem.id);
+    let id = isNaN(elem) ? elem.id : elem;
+    miCarrito.agregarProducto(id);
+}
+
+function quitarDelCarrito(elem) {
+    let id = isNaN(elem) ? elem.id : elem;
+    miCarrito.quitarProducto(id);
 }
 
 calcularTotal(); // despues lo voy a mover
@@ -181,4 +229,5 @@ function finalizarCompra()
     contenedorCarrito.innerHTML = "";
 
     calcularTotal();
+    localStorage.clear();
 }
