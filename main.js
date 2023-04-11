@@ -69,8 +69,8 @@ class Carrito
     agregarAModal(nuevoProducto) {
         let prueba_carrito = document.getElementById("contenedor_carrito");
         prueba_carrito.innerHTML += `
-        <div class="card row-prod-carrito" style="width: 18rem;">
-            <img src= "${nuevoProducto.rutaImg}" class="img-fluid rounded-start prod-carrito-img" alt="..." />
+        <div class="card row-prod-carrito" id="fila-prod-${nuevoProducto.id}" style="width: 18rem;">
+            <img src= "${nuevoProducto.rutaImg}" class="img-fluid rounded-start prod-carrito-img" />
             <div class="card-body prod-carrito" id=prod-carrito-${nuevoProducto.id}">
                 <h5 class="card-title">${nuevoProducto.nombre}</h5>
                 <p class="card-text" id="det-prod-carrito-${nuevoProducto.id}">
@@ -162,12 +162,14 @@ class Carrito
         }
         else
         {
-            //this.listaCarrito.remove(prod.id); // cómo hago algo así?
             // Saco el producto del carrito
-            let detalleProd = document.getElementById(`det-prod-carrito-${prod.id}`);
+            let detalleProd = document.getElementById(`fila-prod-${prod.id}`);            
             detalleProd.remove();
-            
+         
+            // falta eliminar a prod de this.listaCarrito (que es un array) antes de guardarlo en el storage
             this.actualizarCarritoEnStorage();
+
+            // falta actualizar el valor del total también
             this.alertaProductoQuitado(prod.nombre);
         }
     }
