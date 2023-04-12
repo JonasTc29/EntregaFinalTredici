@@ -139,6 +139,7 @@ class Carrito
 
     vaciarCarrito()
     {
+        
         this.listaCarrito= []; 
     }
 
@@ -166,9 +167,13 @@ class Carrito
             let detalleProd = document.getElementById(`fila-prod-${prod.id}`);            
             detalleProd.remove();
          
-            // falta eliminar a prod de this.listaCarrito (que es un array) antes de guardarlo en el storage
-            this.actualizarCarritoEnStorage();
+            // Ahora borro del carrito el último elemento de ese producto
+            let indiceDelProducto = this.listaCarrito.indexOf(prod);
+            this.listaCarrito.splice(indiceDelProducto, 1);
 
+            this.actualizarCarritoEnStorage();
+            calcularTotal() ;
+          
             // falta actualizar el valor del total también
             this.alertaProductoQuitado(prod.nombre);
         }
