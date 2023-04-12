@@ -18,9 +18,13 @@ function calcularTotal()
 }
 
 async function obtenerProductosDisp() {
-    return await fetch('./prod-disp.json')
-      .then(response => response.json())
-      .then(data => console.log(data));
+    const response = await fetch('/.prod-disp.json')
+                            .then(response => response.json())
+                            .then(data => console.log(data));
+    return response;
+    // return await fetch('./prod-disp.json')
+    //   .then(response => response.json())
+    //   .then(data => console.log(data));
 }
 
 // --- CLASES ---
@@ -203,7 +207,9 @@ class Carrito
     {id: 11, nombre: "Quemador Women Keto", precio: 3000,stockDisponible: 1, cantActual: 0, rutaImg:"./Assets/Quemadorwomen.png"},
     {id: 12, nombre: "Quemador Black",precio:  4000, stockDisponible:3, cantActual: 0, rutaImg:"./Assets/Quemadorblack.jpg"}, 
  ]; */
+
  const productosDisponibles = obtenerProductosDisp();
+ 
 // El carrito empieza vacío
 let miCarrito = new Carrito();
 
@@ -250,3 +256,8 @@ function finalizarCompra()
     calcularTotal();
     localStorage.clear();
 }
+
+//const api = require('./api'); // Importa la función obtenerFechaHora del archivo api.js
+
+//const fechaCompra = api.obtenerFechaHora().fecha; // Llama a la función obtenerFechaHora y obtiene la fecha y hora actual
+// Utiliza la fecha y hora recibidas para registrar la compra en tu carrito

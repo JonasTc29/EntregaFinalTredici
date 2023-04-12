@@ -101,14 +101,14 @@ nav a {
 
 footer i {
     bottom: 0;
-    background:  #2a3335a2;
+    background:  cornsilk;
     color: #4000ff;
 }
 footer a:hover{
     color:#4000ff;
 }
 footer{
-    background-color: rgba(163, 207, 240, 0.943);
+    background-color: #0dcaf0 ;
     z-index: 10;
 }
 
