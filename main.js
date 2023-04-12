@@ -17,6 +17,12 @@ function calcularTotal()
     document.getElementById("printTotalCarrito").innerHTML = `$${total}`;
 }
 
+async function obtenerProductosDisp() {
+    return await fetch('./prod-disp.json')
+      .then(response => response.json())
+      .then(data => console.log(data));
+}
+
 // --- CLASES ---
  
 class Carrito
@@ -183,7 +189,7 @@ class Carrito
 // --- CÓDIGO ---
 
 // Productos de la galería como JSON
-const productosDisponibles = [
+/* const productosDisponibles = [
     {id: 1, nombre: "Whey Protein ENA", precio: 6000, stockDisponible: 10, cantActual: 0, rutaImg: "./Assets/Proteena.png"},
     {id: 2, nombre: "Proteina Bsn Chocolate", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/ProteB.jpg"},
     {id: 3, nombre: "Proteina Bsn Vainilla", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/Vainillabsn.png"},
@@ -196,7 +202,8 @@ const productosDisponibles = [
     {id: 10, nombre: "Quemador Universal", precio: 7500,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadoruniversal.webp"},
     {id: 11, nombre: "Quemador Women Keto", precio: 3000,stockDisponible: 1, cantActual: 0, rutaImg:"./Assets/Quemadorwomen.png"},
     {id: 12, nombre: "Quemador Black",precio:  4000, stockDisponible:3, cantActual: 0, rutaImg:"./Assets/Quemadorblack.jpg"}, 
- ];
+ ]; */
+ const productosDisponibles = obtenerProductosDisp();
 // El carrito empieza vacío
 let miCarrito = new Carrito();
 
