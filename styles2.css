@@ -80,8 +80,8 @@ nav a {
 }
 
 .empty-cart {
-    background-color:  #E65100;
-    color: #fff;
+    background-color:  #7d7d7d;
+    color: #ffffff;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -89,7 +89,7 @@ nav a {
   }
   
   .empty-cart:hover {
-    background-color:  #E65100;
+    background-color:  #7d7d7d;
   }
   
   .fa {

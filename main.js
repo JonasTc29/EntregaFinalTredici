@@ -1,10 +1,5 @@
 // --- FUNCIONES ---
 
-function mialerta()
-{  
-    alert("Reservas únicamente por WhatsApp");
-}
-
 function calcularTotal()
 {
     let total = 0;
@@ -15,16 +10,6 @@ function calcularTotal()
         total = total + precioTotalProducto;
     }
     document.getElementById("printTotalCarrito").innerHTML = `$${total}`;
-}
-
-async function obtenerProductosDisp() {
-    const response = await fetch('/.prod-disp.json')
-                            .then(response => response.json())
-                            .then(data => console.log(data));
-    return response;
-    // return await fetch('./prod-disp.json')
-    //   .then(response => response.json())
-    //   .then(data => console.log(data));
 }
 
 // --- CLASES ---
@@ -149,8 +134,13 @@ class Carrito
 
     vaciarCarrito()
     {
-        
+        let filasDelCarrito = document.querySelectorAll('.row-prod-carrito');
+        for (let i = 0; i < filasDelCarrito.length; i++) {
+            filasDelCarrito[i].remove();
+        }
         this.listaCarrito= []; 
+        this.actualizarCarritoEnStorage();
+        calcularTotal();
     }
 
     quitarProducto(id) 
@@ -182,36 +172,12 @@ class Carrito
             this.listaCarrito.splice(indiceDelProducto, 1);
 
             this.actualizarCarritoEnStorage();
-            calcularTotal() ;
+            calcularTotal();
           
-            // falta actualizar el valor del total también
             this.alertaProductoQuitado(prod.nombre);
         }
     }
 }
-
-// --- CÓDIGO ---
-
-// Productos de la galería como JSON
-/* const productosDisponibles = [
-    {id: 1, nombre: "Whey Protein ENA", precio: 6000, stockDisponible: 10, cantActual: 0, rutaImg: "./Assets/Proteena.png"},
-    {id: 2, nombre: "Proteina Bsn Chocolate", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/ProteB.jpg"},
-    {id: 3, nombre: "Proteina Bsn Vainilla", precio:18000, stockDisponible:5,cantActual: 0, rutaImg: "./Assets/Vainillabsn.png"},
-    {id: 4,nombre:  "Proteina Muscletech",precio: 15000, stockDisponible:15, cantActual: 0, rutaImg:"./Assets/ProteMuscletech.png"},
-    {id: 5, nombre: "Proteina Star", precio:4800, stockDisponible:5, cantActual: 0, rutaImg:"./Assets/Protestar.png"},
-    {id: 6, nombre: "Proteina Cellucor",precio: 20000,stockDisponible: 4, cantActual: 0, rutaImg:"./Assets/Proteincelu.png"},
-    {id: 7, nombre: "Quemador ENA",precio: 2200, stockDisponible:15, cantActual: 0, rutaImg:"./Assets/Quemadorena.webp"},
-    {id: 8, nombre: "Quemador BPI Sports", precio: 4000,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadorhp.png"},
-    {id: 9, nombre: "Quemador Ultra Tech", precio: 3500,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadorultra.webp"}, 
-    {id: 10, nombre: "Quemador Universal", precio: 7500,stockDisponible: 10, cantActual: 0, rutaImg:"./Assets/Quemadoruniversal.webp"},
-    {id: 11, nombre: "Quemador Women Keto", precio: 3000,stockDisponible: 1, cantActual: 0, rutaImg:"./Assets/Quemadorwomen.png"},
-    {id: 12, nombre: "Quemador Black",precio:  4000, stockDisponible:3, cantActual: 0, rutaImg:"./Assets/Quemadorblack.jpg"}, 
- ]; */
-
- const productosDisponibles = obtenerProductosDisp();
- 
-// El carrito empieza vacío
-let miCarrito = new Carrito();
 
 function agregarACarrito(elem) {
     let id = isNaN(elem) ? elem.id : elem;
@@ -223,7 +189,9 @@ function quitarDelCarrito(elem) {
     miCarrito.quitarProducto(id);
 }
 
-calcularTotal(); // despues lo voy a mover
+function vaciarCarrito() {
+    miCarrito.vaciarCarrito();
+}
 
 // Para que se actualice el valor total del carrito cada vez que se agregue un producto
 function addListeners() {
@@ -233,9 +201,10 @@ function addListeners() {
             calcularTotal();
         }); 
      }
+     document.querySelector('.btn-vaciar').addEventListener('click', () => {
+        vaciarCarrito();
+     });
 }
-
-addListeners();
 
 // Function para finalizar compra -> Muestra fin de compra exitosa y vacía el carrito
 function finalizarCompra()
@@ -257,7 +226,24 @@ function finalizarCompra()
     localStorage.clear();
 }
 
-//const api = require('./api'); // Importa la función obtenerFechaHora del archivo api.js
+// --- CÓDIGO ---
 
-//const fechaCompra = api.obtenerFechaHora().fecha; // Llama a la función obtenerFechaHora y obtiene la fecha y hora actual
-// Utiliza la fecha y hora recibidas para registrar la compra en tu carrito
+async function obtenerProductosDisponibles() {
+    const res = await fetch('./prod-disp.json');
+    const listaProds = await res.json();
+    return listaProds;
+}
+
+// Variables globales y main
+
+let productosDisponibles = null;
+let miCarrito = null;
+
+async function main() {
+    productosDisponibles = await obtenerProductosDisponibles();
+    miCarrito = new Carrito();
+    calcularTotal();
+    addListeners();
+}
+
+main();
